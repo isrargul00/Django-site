@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'records',
     'accounts',
-    'bootstrap3',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [

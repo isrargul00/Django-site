@@ -3,5 +3,10 @@
 {%block body_block%}
     <div class="container">
         <h1>Welcome</h1>
+        <ul class="list-group">
+            {% for record in records %}
+            <li class="list-group-item">{{record}}</li>
+            {% endfor%}
+        </ul>
     </div>
 {%endblock%}

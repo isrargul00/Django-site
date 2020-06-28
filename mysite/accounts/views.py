@@ -3,6 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
 # Create your views here.
 
 def user_login(request):
@@ -31,4 +32,15 @@ def user_logout(request):
     return redirect("accounts:login")
 
 def registration(request):
-    return render(request,'accounts/registration.html')
+    if request.method == 'POST':
+        username =  request.POST.get('username')
+        email    =  request.POST.get('email')
+        password =  request.POST.get('password')
+        print(f'--------------------{username}---------------')
+        obj = User.objects.create_user(username=username,email=email,password=password)
+        print(f'----------------come form user data {obj}---------')
+        obj.save()
+        messages.add_message(request,messages.SUCCESS,'your is sucess full create')
+        return redirect('accounts:login')
+    else:
+        return render(request,'accounts/registration.html')
